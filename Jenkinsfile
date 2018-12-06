@@ -20,13 +20,5 @@ pipeline {
       }
     }
    
-    stage("choose application build") {
-      steps {
-        script {
-          def chosen_release = "${params.Release}"
-          echo "you choice: $chosen_release"
-        }
-      }
-    }
   }
 }
