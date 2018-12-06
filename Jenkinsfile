@@ -3,9 +3,7 @@ def releases
 
 node {
    checkout scm
-   sh (script: "pwd", returnStdout: true).trim()
-   sh (script: "ls", returnStdout: true).trim()
-   releases = sh (script: "${PWD}@script/_scripts/get_releases.py", returnStdout: true).trim()
+   releases = sh (script: "./_scripts/get_releases.py", returnStdout: true).trim()
 }
 
 pipeline {
