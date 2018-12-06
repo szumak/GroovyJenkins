@@ -41,6 +41,9 @@ pipeline {
       steps {
         script {
           echo "Selected release: ${params.Release}"
+          Jenkins.instance.getAllItems(AbstractItem.class).each {
+            println(it.fullName)
+          }
         }
       }
     }
