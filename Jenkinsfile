@@ -25,6 +25,10 @@ pipeline {
         script {
           def chosen_release = "${params.Release}"
           version_collection = sh (script: "./_scripts/get_releases.py -c config.ini", returnStdout: true).trim()
+          applications = sh (script: "./_scripts/get_releases.py -c config.ini -r ${chosen_release}", returnStdout: true).trim().split('\n')
+          applications.each {
+            println "Application ${it}"     
+          }
           versions = input message: 'Choose testload version!', ok: 'SET', parameters: [ 
                                                                                          choice(name: 'APP1', choices: "${version_collection}", description: ''),
                                                                                          choice(name: 'APP2', choices: "${version_collection}", description: '')]
