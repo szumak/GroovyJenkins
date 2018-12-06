@@ -22,7 +22,13 @@ pipeline {
 
     stage("stage 2") {
       steps {
-         sh "echo start"
+        script {
+          def chosen_release = "${params.Release}"
+          version_collection = sh (script: "./_scripts/get_releases.py -c config.ini", returnStdout: true).trim()
+          versions = input message: 'Choose testload version!', ok: 'SET', parameters: [ 
+                                                                                         choice(name: 'APP1', choices: "${version_collection}", description: ''),
+                                                                                         choice(name: 'APP2', choices: "${version_collection}", description: '')]
+        }
       }
     }
 
