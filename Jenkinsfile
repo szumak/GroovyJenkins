@@ -6,5 +6,8 @@ try {
       stage('Start') {
          sh 'echo start'
       }
-   }
+}
+catch (exc) {
+    echo "Caught: ${exc}"
+
 }
