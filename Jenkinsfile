@@ -25,6 +25,14 @@ pipeline {
          sh "echo start"
       }
     }
+
+    stage("build") {
+      steps {
+        script {
+          echo "Selected release: ${params.Release}"
+        }
+      }
+    }
    
   }
 }
