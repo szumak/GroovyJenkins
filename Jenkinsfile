@@ -1,5 +1,6 @@
 #!/usr/bin/env groovy
 def releases
+import jenkins.model.Jenkins
 
 node {
    checkout scm
