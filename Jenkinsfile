@@ -1,14 +1,20 @@
 #!/usr/bin/env groovy
-/* source: https://github.com/jenkins-infra/jenkins.io/blob/master/Jenkinsfile/ */
+def releases
 
-try {
-   node('master-node') {
-      stage('Start') {
-         sh 'echo start'
-      }
-   }
+node {
+   releases = sh (script: "../${JOB_NAME}@script/_scripts/get_releases.py", returnStdout: true).trim()
 }
-catch (exc) {
-    echo "Caught: ${exc}"
-    throw exc
+
+pipeline {
+  agent any
+  parameters {
+    choice(name: 'Release', choices:"${releases}", description: "")
+  }
+  stages {
+    stage("stage 1") {
+      steps {
+         sh "echo start"
+      }
+    }
+  }
 }
