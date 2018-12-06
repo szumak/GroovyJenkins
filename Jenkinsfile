@@ -2,7 +2,7 @@
 def releases
 
 node {
-   releases = sh (script: "../${JOB_NAME}@script/_scripts/get_releases.py", returnStdout: true).trim()
+   releases = sh (script: "../${PWD}@script/_scripts/get_releases.py", returnStdout: true).trim()
 }
 
 pipeline {
