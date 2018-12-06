@@ -2,7 +2,7 @@
 /* source: https://github.com/jenkins-infra/jenkins.io/blob/master/Jenkinsfile/ */
 
 try {
-   node('any') {
+   node('master-node') {
       stage('Start') {
          sh 'echo start'
       }
