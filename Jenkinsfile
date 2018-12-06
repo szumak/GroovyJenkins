@@ -3,7 +3,7 @@ def releases
 
 node {
    checkout scm
-   releases = sh (script: "./_scripts/get_releases.py", returnStdout: true).trim()
+   releases = sh (script: "./_scripts/get_releases.py -c config.ini", returnStdout: true).trim()
 }
 
 pipeline {
