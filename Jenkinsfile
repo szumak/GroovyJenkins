@@ -25,12 +25,12 @@ pipeline {
       steps {
         script {
           def chosen_release = "${params.Release}"
-          //version_collection = sh (script: "./_scripts/get_releases.py -c config.ini", returnStdout: true).trim()
           applications = sh (script: "./_scripts/get_releases.py -c config.ini -r ${chosen_release}", returnStdout: true).trim().split('\n')
           def choice_app = [];
+          def options = "aa\nbb\ncc"
           applications.each {
             println "Application ${it}"     
-            choice_app.push( choice( name: "${it}", choices: "${releases}", description:'' ) )
+            choice_app.push( choice( name: "${it}", choices: "${options}", description:'' ) )
           }
           versions = input message: 'Choose testload version!', ok: 'SET', parameters: choice_app 
         }
