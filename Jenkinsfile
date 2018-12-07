@@ -44,7 +44,8 @@ pipeline {
           Jenkins.instance.getAllItems().each {
             println(it.fullName)
           };
-          jobItem = Jenkins.instance.getItemByFullName('test-jenkinsfile-parameters/JenkinsfileParameters')
+          //jobItem = Jenkins.instance.getItemByFullName('test-jenkinsfile-parameters/JenkinsfileParameters')
+          out.println(Jenkins.instance.getItem("JenkinsfileParameters"))
           //println jobItem.getDisplayName()
         }
       }
