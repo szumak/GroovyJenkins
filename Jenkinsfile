@@ -63,8 +63,10 @@ pipeline {
 
 
 // FUNCTIONS
-
+@NonCPS
 def getOptions() {
+  def name = "myJenkinsPipeline/github-groovyJenkins"
+  def item = Jenkins.instance.getItemByFullName(name)
   def a = ["aa","bb","cc","dd","ee","ff"]
   options = a.take(4).join("\n")
   return options
