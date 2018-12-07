@@ -28,20 +28,9 @@ pipeline {
           def chosen_release = "${params.Release}"
           applications = sh (script: "./_scripts/get_releases.py -c config.ini -r ${chosen_release}", returnStdout: true).trim().split('\n')
           def choice_app = [];
-          //def name = "myJenkinsPipeline/github-groovyJenkins"
-          //def item = Jenkins.instance.getItemByFullName(name)
-          //tmp_options = []
-          //item.builds.each {
-          //  tmp_options.push( "#" + it.getNumber() ) 
-          //}
-          //tmp_options = tmp_options.take(5).join(",")
-          //println "TMP_OPTIONS:" + tmp_options 
-	  /*
-          def options = tmp_options.take(5).join("\n")
-          */
           applications.each {
-            println "Application ${it}"     
-            options = getOptions("myJenkinsPipeline/github-groovyJenkins")
+            jenkinsJobName = sh (script: "./_scripts/get_releases.py -c config.ini -a ${it}", returnStdout: true).trim()
+            options = getBuilds(jenkinsJobName)
             choice_app.push( choice( name: "${it}", choices: "${options}", description:'' ) )
           }
           versions = input message: 'Choose testload version!', ok: 'SET', parameters: choice_app 
@@ -64,7 +53,7 @@ pipeline {
 
 // FUNCTIONS
 @NonCPS
-def getOptions(name) {
+def getBuilds(name) {
   def item = Jenkins.instance.getItemByFullName(name)
   tmp_options = []
   item.builds.each {
