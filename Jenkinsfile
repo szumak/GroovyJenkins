@@ -25,17 +25,7 @@ pipeline {
       steps {
         script {
           def chosen_release = "${params.Release}"
-
-          def name = "myJenkinsPipeline/github-groovyJenkins"
-          def item = Jenkins.instance.getItemByFullName(name)
-          /*
-          options = []
-          item.builds.each {
-            options.push( "#" + it.getNumber() ) 
-          }
-          options = options.take(10).join("\n")
-          println "OPTIONS: " + options
-          */
+          //version_collection = sh (script: "./_scripts/get_releases.py -c config.ini", returnStdout: true).trim()
           applications = sh (script: "./_scripts/get_releases.py -c config.ini -r ${chosen_release}", returnStdout: true).trim().split('\n')
           def choice_app = [];
           applications.each {
