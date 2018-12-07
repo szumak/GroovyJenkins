@@ -38,7 +38,7 @@ pipeline {
           def choice_app = [];
           applications.each {
             println "Application ${it}"     
-            choice_app.push( choice( name: "${it}", choices: "${releases}", description:'' ) )
+            choice_app.push( choice( name: "${it}", choices: "aa", description:'' ) )
           }
           versions = input message: 'Choose testload version!', ok: 'SET', parameters: choice_app 
         }
