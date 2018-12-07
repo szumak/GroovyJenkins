@@ -41,15 +41,18 @@ pipeline {
       steps {
         script {
           echo "Selected release: ${params.Release}"
-          Jenkins.instance.getAllItems().each {
-            println(it.fullName)
-          };
-		jenkins.model.Jenkins.instance?.getAllItems().each { folder ->
-		  println "Folder - ${folder}"
-	           folder.getItems().each {
-		     println "\t job - ${it}"
-		   } 
-		} 
+          def jenkins = Jenkins.getInstance()
+          def jobName = "myJenkinsPipeline"
+          def job = jenkins.getItem(jobName)
+          
+          println "Job type: ${job.getClass()}"
+          println "Is isBuildable: ${job.isBuildable()}"
+          
+          def j = job.getAllJobs()[0]
+          
+          j.builds.each {
+            println "${it}"
+          }
         }
       }
     }
