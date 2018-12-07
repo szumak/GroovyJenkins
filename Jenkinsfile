@@ -44,7 +44,7 @@ pipeline {
           Jenkins.instance.getAllItems().each {
             println(it.fullName)
           };
-		jenkins.model.Jenkins.instance?.getAllItems(com.cloudbees.hudson.plugins.folder.Folder).each { folder ->
+		jenkins.model.Jenkins.instance?.getAllItems().each { folder ->
 		  println "Folder - ${folder}"
 	           folder.getItems().each {
 		     println "\t job - ${it}"
