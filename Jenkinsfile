@@ -30,7 +30,7 @@ pipeline {
           def choice_app = [];
           def name = "myJenkinsPipeline/github-groovyJenkins"
           def item = Jenkins.instance.getItemByFullName(name)
-          def tmp_options = []
+          tmp_options = []
           item.builds.each {
             tmp_options.push( "#" + it.getNumber() ) 
           }
