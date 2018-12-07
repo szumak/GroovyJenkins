@@ -32,7 +32,7 @@ pipeline {
           item.builds.each {
             options.push( "#" + it.getNumber() ) 
           }
-          options = options.take(10)
+          options = options.take(10).join("\n")
           applications = sh (script: "./_scripts/get_releases.py -c config.ini -r ${params.Release}", returnStdout: true).trim().split('\n')
           def choice_app = [];
           applications.each {
