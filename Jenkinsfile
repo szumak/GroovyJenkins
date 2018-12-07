@@ -33,9 +33,10 @@ pipeline {
           def tmp_options = []
           item.builds.each {
             tmp_options.push( "#" + it.getNumber() ) 
+            println it
           }
-          tmp_options = tmp_options.take(5).join(",")
-          println "TMP_OPTIONS:" + tmp_options 
+          //tmp_options = tmp_options.take(5).join(",")
+          //println "TMP_OPTIONS:" + tmp_options 
 	  /*
           def options = tmp_options.take(5).join("\n")
           */
