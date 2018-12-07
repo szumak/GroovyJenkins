@@ -35,7 +35,7 @@ pipeline {
           item.builds.each {
             tmp_options.push( "#" + it.getNumber() ) 
           }
-          def options = options.take(5).join("\n")
+          def options = tmp_options.take(5).join("\n")
 
           applications.each {
             println "Application ${it}"     
