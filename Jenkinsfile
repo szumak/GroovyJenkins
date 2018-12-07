@@ -37,8 +37,8 @@ pipeline {
           }
           def options = tmp_options.take(5).join("\n")
           */
-          def a = ["aa","bb","cc"]
-          options = a.join("\n")
+          def a = ["aa","bb","cc","dd","ee","ff"]
+          options = a.take(4).join("\n")
           applications.each {
             println "Application ${it}"     
             choice_app.push( choice( name: "${it}", choices: "${options}", description:'' ) )
