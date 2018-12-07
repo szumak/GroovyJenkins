@@ -33,11 +33,11 @@ pipeline {
             options.push( "#" + it.getNumber() ) 
           }
           options = options.take(10)
-          applications = sh (script: "./_scripts/get_releases.py -c config.ini -r ${options}", returnStdout: true).trim().split('\n')
+          applications = sh (script: "./_scripts/get_releases.py -c config.ini -r ${params.Release}", returnStdout: true).trim().split('\n')
           def choice_app = [];
           applications.each {
             println "Application ${it}"     
-            choice_app.push( choice( name: "${it}", choices: "${version_collection}", description:'' ) )
+            choice_app.push( choice( name: "${it}", choices: "${options}", description:'' ) )
           }
           versions = input message: 'Choose testload version!', ok: 'SET', parameters: choice_app 
         }
@@ -47,19 +47,9 @@ pipeline {
     stage("build") {
       steps {
         script {
-          echo "Selected release: ${params.Release}"
-          def jenkins = Jenkins.getInstance()
-          def jobName = "myJenkinsPipeline"
-          def job = jenkins.getItem(jobName)
+          println "Selected release: ${params.Release}"
+          //println "Selected version: ${params.}"
           
-          println "Job type: ${job.getClass()}"
-          println "Is isBuildable: ${job.isBuildable()}"
-          
-          def j = job.getAllJobs()[0]
-          
-          j.builds.each {
-            println "${it.getNumber()}"
-          }
         }
       }
     }
