@@ -1,5 +1,6 @@
 #!/usr/bin/env groovy
 def releases
+def versions
 import jenkins.model.Jenkins
 
 node {
@@ -40,8 +41,8 @@ pipeline {
     stage("build") {
       steps {
         script {
-          echo "Selected release"
-          //println "Selected version: ${params.}"
+          #echo "Selected release"
+          println "Selected version: ${version}"
           
         }
       }
