@@ -41,7 +41,6 @@ pipeline {
     stage("build") {
       steps {
         script {
-          #echo "Selected release"
           println "Selected version: ${version}"
           
         }
