@@ -28,17 +28,19 @@ pipeline {
 
           def name = "myJenkinsPipeline/github-groovyJenkins"
           def item = Jenkins.instance.getItemByFullName(name)
+          /*
           options = []
           item.builds.each {
             options.push( "#" + it.getNumber() ) 
           }
           options = options.take(10).join("\n")
           println "OPTIONS: " + options
-          applications = sh (script: "./_scripts/get_releases.py -c config.ini -r ${params.Release}", returnStdout: true).trim().split('\n')
+          */
+          applications = sh (script: "./_scripts/get_releases.py -c config.ini -r ${chosen_release}", returnStdout: true).trim().split('\n')
           def choice_app = [];
           applications.each {
             println "Application ${it}"     
-            choice_app.push( choice( name: "${it}", choices: "aa", description:'' ) )
+            choice_app.push( choice( name: "${it}", choices: "${releases}", description:'' ) )
           }
           versions = input message: 'Choose testload version!', ok: 'SET', parameters: choice_app 
         }
