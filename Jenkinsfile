@@ -33,11 +33,12 @@ pipeline {
             options.push( "#" + it.getNumber() ) 
           }
           options = options.take(10).join("\n")
+          println "OPTIONS: " + options
           applications = sh (script: "./_scripts/get_releases.py -c config.ini -r ${params.Release}", returnStdout: true).trim().split('\n')
           def choice_app = [];
           applications.each {
             println "Application ${it}"     
-            choice_app.push( choice( name: "${it}", choices: "${options}", description:'' ) )
+            choice_app.push( choice( name: "${it}", choices: "aa\nbb", description:'' ) )
           }
           versions = input message: 'Choose testload version!', ok: 'SET', parameters: choice_app 
         }
