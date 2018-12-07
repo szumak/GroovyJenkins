@@ -41,7 +41,7 @@ pipeline {
           */
           applications.each {
             println "Application ${it}"     
-            options = getOptions()
+            options = getOptions("myJenkinsPipeline/github-groovyJenkins")
             choice_app.push( choice( name: "${it}", choices: "${options}", description:'' ) )
           }
           versions = input message: 'Choose testload version!', ok: 'SET', parameters: choice_app 
@@ -64,10 +64,11 @@ pipeline {
 
 // FUNCTIONS
 @NonCPS
-def getOptions() {
-  def name = "myJenkinsPipeline/github-groovyJenkins"
+def getOptions(name) {
   def item = Jenkins.instance.getItemByFullName(name)
-  def a = ["aa","bb","cc","dd","ee","ff"]
-  options = a.take(4).join("\n")
-  return options
+  tmp_options = []
+  item.builds.each {
+    tmp_options.push( "#" + it.getNumber() ) 
+  }
+  return tmp_options.take(5).join("\n")
 }
