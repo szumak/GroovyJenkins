@@ -28,7 +28,7 @@ pipeline {
           def chosen_release = "${params.Release}"
           applications = sh (script: "./_scripts/get_releases.py -c config.ini -r ${chosen_release}", returnStdout: true).trim().split('\n')
           def choice_app = [];
-
+	  /*
           def name = "myJenkinsPipeline/github-groovyJenkins"
           def item = Jenkins.instance.getItemByFullName(name)
           tmp_options = []
@@ -36,7 +36,9 @@ pipeline {
             tmp_options.push( "#" + it.getNumber() ) 
           }
           def options = tmp_options.take(5).join("\n")
-
+          */
+          def a = ["aa","bb","cc"]
+          options = a.join("\n")
           applications.each {
             println "Application ${it}"     
             choice_app.push( choice( name: "${it}", choices: "${options}", description:'' ) )
