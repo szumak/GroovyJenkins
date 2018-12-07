@@ -41,7 +41,7 @@ pipeline {
     stage("build") {
       steps {
         script {
-          println "Selected version: ${version}"
+          println "Selected version: ${versions}"
           
         }
       }
