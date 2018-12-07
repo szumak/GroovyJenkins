@@ -44,6 +44,8 @@ pipeline {
           Jenkins.instance.getAllItems().each {
             println(it.fullName)
           };
+          def jobName = "JenkinsfileParameters"
+          println "Looking for ${jobName}"
           def job = Hudson.instance.getJob("JenkinsfileParameters")
           println job.fullName
      
