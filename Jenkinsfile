@@ -30,11 +30,9 @@ pipeline {
           def item = Jenkins.instance.getItemByFullName(name)
           options = []
           item.builds.each {
-            options.push( it ) 
+            options.push( "#" + it.getNumber() ) 
           }
-          
           options = options.take(10)
-        
           applications = sh (script: "./_scripts/get_releases.py -c config.ini -r ${options}", returnStdout: true).trim().split('\n')
           def choice_app = [];
           applications.each {
@@ -60,7 +58,7 @@ pipeline {
           def j = job.getAllJobs()[0]
           
           j.builds.each {
-            println "${it}"
+            println "${it.getNumber()}"
           }
         }
       }
