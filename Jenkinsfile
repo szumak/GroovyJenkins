@@ -48,7 +48,7 @@ pipeline {
     stage("build") {
       steps {
         script {
-          println "Selected release: ${params.Release}"
+          echo "Selected release"
           //println "Selected version: ${params.}"
           
         }
