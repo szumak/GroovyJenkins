@@ -43,7 +43,7 @@ pipeline {
         script {
           println "Selected version: ${versions}"
           versions.each { 
-            key, value -> print key;
+            println "${it.key}${it.value}"
           } 
         }
       }
