@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
 def releases
 def versions
+def options
 import jenkins.model.Jenkins
 
 node {
@@ -41,10 +42,12 @@ pipeline {
     stage("build") {
       steps {
         script {
-          println "Selected version: ${versions}"
+          def myOpt = [];
           versions.each { 
-            println "${it.key}${it.value}"
+            myOpt.push( "${it.key}${it.value}" )
           } 
+          options = "-ab " + myOpt.join(",")
+          println "OPTIONS: " + options
         }
       }
     }
