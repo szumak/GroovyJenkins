@@ -43,9 +43,7 @@ pipeline {
         script {
           println "Selected version: ${versions}"
           versions.each { 
-            app = it.split('=')
-            println "application: " + app[0] 
-            println "release: " + app[1] 
+            key, value -> print key;
           } 
         }
       }
