@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import configparser
+import ConfigParser
 import argparse
 
 # Parsing arguments
@@ -10,24 +10,22 @@ parser.add_argument('-r', '--release', help='release section' )
 parser.add_argument('-a', '--application', help='application section' )
 args = parser.parse_args()
 
-config = configparser.ConfigParser()
+config = ConfigParser.ConfigParser()
+
 config.read(args.config)
 
 if args.application:
-  print config[args.application]['jobname']
+  print config.get(args.application,'jobname')
   exit(0)
 
 
-if args.release: 
-  list=config[args.release]['application'].split(',')
+if args.release:
+  list=config.get(args.release,'application').split(',')
   for app in list:
     print app
   exit(0)
 
 # print releases
-list=config['releases']['registered'].split(',')
+list=config.get('releases','registered').split(',')
 for r in list:
    print r
-
-
-
