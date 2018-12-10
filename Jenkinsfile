@@ -55,7 +55,6 @@ pipeline {
   }
 }
 
-
 // FUNCTIONS
 @NonCPS
 def getBuilds(name) {
