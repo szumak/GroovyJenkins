@@ -42,7 +42,9 @@ pipeline {
       steps {
         script {
           println "Selected version: ${versions}"
-          
+          versions.each { 
+            println "${it}"
+          } 
         }
       }
     }
